@@ -1,0 +1,26 @@
+{# src/rj/StreamBundle/Resources/views/Saisons/index.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('/css/episode.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}News {{date}}{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}  
+{% endblock %}
+
+{% block body %}
+    <h2>News {{date}} {{id}}</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{# src/rj/StreamBundle/Resources/views/Stream/index.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('/css/home.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}  
+{% endblock %}
+
+{% block body %}
+	<h2>Dernières news</h2>
+	<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div>
+    <h2>Derniers episodes</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div>
+{% endblock %}

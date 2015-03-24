@@ -1,0 +1,20 @@
+rj_stream_homepage:
+    path:     /home
+    defaults: { _controller: rjStreamBundle:Stream:index }
+rj_stream_saison:
+    path:     /saison/{s}
+    defaults: { _controller: rjStreamBundle:Stream:saison }
+    requirements:
+        s:  \d+
+rj_stream_episode:
+    path:     /saison/{s}/episode/{e}
+    defaults: { _controller: rjStreamBundle:Stream:episode}
+    requirements:
+        s:  \d+
+        e:  \d+
+rj_stream_news:
+    path:     /news/{date}/{id}
+    defaults: { _controller: rjStreamBundle:Stream:news}
+    requirements:
+        date:  \d+
+        id:  \d+
