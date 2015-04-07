@@ -3,12 +3,11 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
-    <link href="{{ asset('/css/episode.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
-{% block title %}Saison {{ s }}{% endblock %}
-
+{% block title %}
+Saison {{ s }}
+{% endblock %}
 {% block sidebar %}
     {{ parent() }}  
 {% endblock %}
@@ -17,10 +16,20 @@
     <h2>Saison {{ s }}</h2>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Panel title</h3>
+                <a href="#" class="titre-saison">Saison {{s}}</a>
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                <a href="#" class="titre-saison">Episode 1 : Titre</a>
         </div>
         <div class="panel-body">
-            Panel content
+            <a href="#" class="thumbnail image-saison">
+                <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
+            </a>
+            <p>
+                Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.
+            </p>
+            <div class="pull-right">
+                <a href="#" class="btn btn-default">Play <span class="glyphicon glyphicon-play-circle"></span></a>
+            </div>
         </div>
     </div>
 {% endblock %}

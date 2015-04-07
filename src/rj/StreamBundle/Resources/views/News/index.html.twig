@@ -3,8 +3,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
-    <link href="{{ asset('/css/episode.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 {% block title %}News {{date}}{% endblock %}
@@ -14,7 +12,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2>News {{date}} {{id}}</h2>
+    <h2>News {{date}}</h2>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Panel title</h3>
