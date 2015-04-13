@@ -5,6 +5,6 @@ $(document).ready(function()
 		$('button.hid').attr('disabled', 'disabled');
 		$('button.hid').addClass('disabled');
 		});
-	$('li.active').removeClass('active');
+	$('li.active:first').removeClass('active');
 	$('li.episode').addClass('active');
 });

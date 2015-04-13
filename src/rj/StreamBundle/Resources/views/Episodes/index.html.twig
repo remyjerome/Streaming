@@ -3,8 +3,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
-
 {% endblock %}
 
 {% block title %}S{{s}}-Episode{{e}}{% endblock %}
@@ -19,14 +17,14 @@
     <h2>Saison {{ s }} Episode {{ e }}</h2>
     <div class="panel panel-default">
         <div class="panel-heading">
-                <a href="#" class="titre-saison">Saison {{s}}</a>
+                <a href="{{ path('rj_stream_saison', { 's': s }) }}" class="titre-saison">Saison {{s}}</a>
                 <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-                <a href="#" class="titre-saison">Episode 1 : Titre</a>
+                <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e}) }}" class="titre-saison">Episode {{e}} : {{episode.titre}}</a>
         </div>
         <div class="panel-body">
             <div class="row">
             <div class="col-xs-4">
-                <a href="#" class="thumbnail image-saison-left pull-left ">
+                <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e-1}) }}" class="thumbnail image-saison-left pull-left ">
                     <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
                 </a>
             </div>
@@ -41,77 +39,70 @@
                 </div>
             </div>
             <div class="col-xs-4">
-            <a href="#" class="thumbnail image-saison-right pull-right">
+            <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e+1}) }}" class="thumbnail image-saison-right pull-right">
                 <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
             </a>
             </div>
             </div><!-- row -->
             <div class="jumbotron">
-            <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+            <p>Pour le moment un seul lecteur est à votre disposition : MyStream.</p>
             </div>
             <ul class="nav nav-tabs nav-justified">
               <li role="presentation" class="dropdown active">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  Purevid <span class="caret"></span>
+                  MyStream <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">VF</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href="#">VOST</a></li>
                 </ul>
               </li>
-              <li role="presentation" class="dropdown">
+              <li role="presentation" class="dropdown disabled">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                   Exashare <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Separated link</a></li>
+                    <li class="disabled"><a href="#" >VF</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li class="disabled"><a href="#">VOST</a></li>
                 </ul>
               </li>
-              <li role="presentation" class="dropdown">
+              <li role="presentation" class="dropdown disabled">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  Autre <span class="caret"></span>
+                  PureVid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Separated link</a></li>
+                    <li class="disabled"><a href="#">VF</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-              <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  Autre 2 <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Separated link</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li class="disabled"><a href="#">VOST</a></li>
                 </ul>
               </li>
             </ul>
+            <div class="hebergeur">
+                <p class="next">Selectionez l'hébergeur</p>
+                <img src="{{asset('images/arrow4.png')}}" alt="arrow2" class="">
+                
+            </div>
             <div>            
-              <iframe class="center-block iframe" width="645px" height="360px" frameborder="0" src="http://www.purevid.com/?m=embed&amp;id=37235AAC6zx44547ABAECLSS4393&amp;pv=1"></iframe>
+              <iframe class="center-block iframe" width="645px" height="360px" frameborder="0" src="{{episode.lien}}"></iframe>
             </div>
             <a class="lien-episode center-block" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Liens épisodes
             </a>
             <div class="collapse" id="collapseExample">
               <div class="well center">
-                <a href="#">Purevide link </a>
+                <a href="{{episode.lien}}">MyStream link </a>
                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 <a href="#">Exashare link </a>
                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                <a href="#">Autre link </a>
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                <a href="#">Autre 2 link</a>
+                <a href="#">PureVid link </a>
               </div>
             </div>
         </div>  
         <div class="row">
             <div class="col-xs-4">
-                <div class="fb-like share-fb center-block" data-href="http://localhost:8888/Streaming/web/app_dev.php/saison/1/episode/1" data-width="100%" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
+                <div class="fb-like share-fb center-block" data-href="http://www.brostreaming.com{{path('rj_stream_episode', { 's': s , 'e' : e}) }}" data-width="100%" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
                 </div>
             </div>
             <div class="col-xs-5  pull-right">
@@ -129,12 +120,12 @@
         <strong>Merci!</strong> Votre signalement à été pris en compte.
     </div>
     <div class="jumbotron">
-        <div class="fb-comments" data-href="http://localhost:8888/Streaming/web/app_dev.php/saison/1/episode/1" data-width="100%"data-numposts="5" data-colorscheme="light">
+        <div class="fb-comments" data-href="http://www.brostreaming.com{{path('rj_stream_episode', { 's': s,'e' : e}) }}" data-width="100%"data-numposts="5" data-colorscheme="light">
         </div>
     </div>
 {% endblock %}
 {% block javascripts %}
-{{ parent() }} 
+{{ parent() }}  
 <div id="fb-root"></div>
 <script>
 (function(d, s, id) {
@@ -145,5 +136,5 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-<script src="{{asset('js/mon-script.js')}}"></script>
+<script src="{{asset('js/episode.js')}}"></script>
 {% endblock %}

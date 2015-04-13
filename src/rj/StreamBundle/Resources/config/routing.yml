@@ -13,8 +13,8 @@ rj_stream_episode:
         s:  \d+
         e:  \d+
 rj_stream_news:
-    path:     /news/{date}/{id}
+    path:     /news
     defaults: { _controller: rjStreamBundle:Stream:news}
-    requirements:
-        date:  \d+
-        id:  \d+
+rj_stream_add:
+    path:     /add
+    defaults: { _controller: rjStreamBundle:Stream:create }
