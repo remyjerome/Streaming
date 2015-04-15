@@ -18,3 +18,22 @@ rj_stream_news:
 rj_stream_add:
     path:     /add
     defaults: { _controller: rjStreamBundle:Stream:create }
+rj_stream_episode_all:
+    path:     /episode/all
+    defaults: { _controller: rjStreamBundle:Stream:episodeall}
+rj_stream_episode_vue:
+    path:     /episode/vue
+    defaults: { _controller: rjStreamBundle:Stream:episodevue}
+rj_stream_episode_note:
+    path:     /episode/note
+    defaults: { _controller: rjStreamBundle:Stream:episodenote}
+rj_stream_episode_last:
+    path:     /episode/last
+    defaults: { _controller: rjStreamBundle:Stream:episodelast}
+rj_stream_episode_notation:
+    path:     /notation/{saison}/{episode}/{note}
+    defaults: { _controller: rjStreamBundle:Stream:notation}
+    requirements:
+        note:  \d+
+        episode: \d+
+        saison: \d+

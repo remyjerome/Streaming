@@ -17,67 +17,80 @@
     <h2>Saison {{ s }} Episode {{ e }}</h2>
     <div class="panel panel-default">
         <div class="panel-heading">
-                <a href="{{ path('rj_stream_saison', { 's': s }) }}" class="titre-saison">Saison {{s}}</a>
-                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-                <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e}) }}" class="titre-saison">Episode {{e}} : {{episode.titre}}</a>
-        </div>
+            <a href="{{ path('rj_stream_saison', { 's': s }) }}" class="titre-saison">Saison {{s}}</a>
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e}) }}" class="titre-saison">Episode {{e}} : {{episode.titre}}</a>
+             
+            <div class=" col-xs-3 pull-right note"> 
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success active note-plus" style="width: {{episode.note}}%;">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <span class="sr-only">35% Complete (success)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger note-moins" style="width: {{100-episode.note}}%;">
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        <span class="sr-only">35% Complete (danger)</span>
+                    </div>
+                </div>
+            </div>          
+        </div><!--end panel heading-->
         <div class="panel-body">
             <div class="row">
-            <div class="col-xs-4">
-                <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e-1}) }}" class="thumbnail image-saison-left pull-left ">
-                    <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
-                </a>
-            </div>
-            <div class="col-xs-4">
-                <div class="row">
-                    <img src="{{asset('images/arrow2.1.png')}}" alt="arrow2" class="pull-right image-ep-suiv-prec">
-                    <p class="next" id="text-suivant">Episode suivant</p>
+                <div class="col-xs-4">
+                    <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e-1}) }}" class="thumbnail image-saison-left pull-left ">
+                        <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1">
+                    </a>
                 </div>
-                <div class="row">
-                    <img src="{{asset('images/arrow1.1.png')}}" alt="arrow1" class="pull-left image-ep-suiv-prec">
-                    <p class="next" id="text-precedent">Episode précédent</p>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <img src="{{asset('images/arrow2.1.png')}}" alt="arrow2" class="pull-right image-ep-suiv-prec">
+                        <p class="next" id="text-suivant">Episode suivant</p>
+                    </div>
+                    <div class="row">
+                        <img src="{{asset('images/arrow1.1.png')}}" alt="arrow1" class="pull-left image-ep-suiv-prec">
+                        <p class="next" id="text-precedent">Episode précédent</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-4">
-            <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e+1}) }}" class="thumbnail image-saison-right pull-right">
-                <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
-            </a>
-            </div>
+                <div class="col-xs-4">
+                    <a href="{{ path('rj_stream_episode', { 's': s , 'e' : e+1}) }}" class="thumbnail image-saison-right pull-right">
+                        <img src="{{asset('images/got.jpg')}}" alt="image saison {{s}} episode 1" >
+                    </a>
+                </div>
             </div><!-- row -->
             <div class="jumbotron">
-            <p>Pour le moment un seul lecteur est à votre disposition : MyStream.</p>
+                <p>Pour le moment un seul lecteur est à votre disposition : MyStream.</p>
             </div>
             <ul class="nav nav-tabs nav-justified">
-              <li role="presentation" class="dropdown active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  MyStream <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">VF</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">VOST</a></li>
-                </ul>
-              </li>
-              <li role="presentation" class="dropdown disabled">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                <li role="presentation" class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                      MyStream <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">VF</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">VOST</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown disabled">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                   Exashare <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="disabled"><a href="#" >VF</a></li>
-                    <li class="divider"></li>
-                    <li class="disabled"><a href="#">VOST</a></li>
-                </ul>
-              </li>
-              <li role="presentation" class="dropdown disabled">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="disabled"><a href="#" >VF</a></li>
+                        <li class="divider"></li>
+                        <li class="disabled"><a href="#">VOST</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown disabled">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                   PureVid <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="disabled"><a href="#">VF</a></li>
-                    <li class="divider"></li>
-                    <li class="disabled"><a href="#">VOST</a></li>
-                </ul>
-              </li>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="disabled"><a href="#">VF</a></li>
+                        <li class="divider"></li>
+                        <li class="disabled"><a href="#">VOST</a></li>
+                    </ul>
+                </li>
             </ul>
             <div class="hebergeur">
                 <p class="next">Selectionez l'hébergeur</p>
@@ -85,19 +98,19 @@
                 
             </div>
             <div>            
-              <iframe class="center-block iframe" width="645px" height="360px" frameborder="0" src="{{episode.lien}}"></iframe>
+                <iframe class="center-block iframe" width="645px" height="360px" frameborder="0" src="{{episode.lien}}"></iframe>
             </div>
             <a class="lien-episode center-block" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Liens épisodes
             </a>
             <div class="collapse" id="collapseExample">
-              <div class="well center">
-                <a href="{{episode.lien}}">MyStream link </a>
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                <a href="#">Exashare link </a>
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                <a href="#">PureVid link </a>
-              </div>
+                <div class="well center">
+                    <a href="{{episode.lien}}">MyStream link </a>
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    <a href="#">Exashare link </a>
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    <a href="#">PureVid link </a>
+                </div>
             </div>
         </div>  
         <div class="row">
@@ -106,12 +119,10 @@
                 </div>
             </div>
             <div class="col-xs-5  pull-right">
-            <p class="next text-right mort">Liens mort ?<img src="{{asset('images/arrow3.png')}}" alt="image flèche 3">
-            
-            <button type="button" class="hid" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-            </button>
-            </p>
-            
+                <p class="next text-right mort">Liens mort ?<img src="{{asset('images/arrow3.png')}}" alt="image flèche 3">
+                    <button type="button" class="hid" ><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                    </button>
+                </p>
             </div>
         </div>
     </div>
@@ -125,16 +136,53 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-{{ parent() }}  
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<script src="{{asset('js/episode.js')}}"></script>
+    {{ parent() }}  
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="{{asset('js/episode.js')}}"></script>
+    <script>
+    $('document').ready(function() {
+        $('.note-plus').click(function(){
+            $.ajax({
+                type: 'get',
+                url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/1',
+                beforeSend: function() {
+                    console.log('Chargement');
+                    $('.note-plus').addClass('progress-bar-striped active');
+                },
+                success: function(data) {
+                    console.log(data.note);
+                    $('.note-plus').css('width',data.note+'%');
+                    $('.note-moins').css('width',100 - data.note+'%');
+                    $('.note-plus').removeClass('progress-bar-striped active');
+
+                }
+            });
+        });
+        $('.note-moins').click(function(){
+            $.ajax({
+                type: 'get',
+                url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/0',
+                beforeSend: function() {
+                    console.log('Chargement');
+                    $('.note-moins').addClass('progress-bar-striped active');
+                },
+                success: function(data) {
+                    console.log(data.note);
+                    $('.note-plus').css('width',data.note+'%');
+                    $('.note-moins').css('width',100 - data.note+'%');
+                    $('.note-moins').removeClass('progress-bar-striped active');
+                }
+            });
+        });
+    });
+    </script>
 {% endblock %}

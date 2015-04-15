@@ -4,12 +4,46 @@
 
 namespace rj\StreamBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rj\StreamBundle\Entity\Episode;
 
 class StreamController extends Controller
 {
+    public function notationAction($saison, $episode, $note)
+    {
+        sleep(3);
+        $em = $this->getDoctrine()->getManager();
+        $episode = $em->getRepository('rjStreamBundle:Episode')
+        ->findOneBy(array('saison' => $saison, 'episode' => $episode));
+
+        if($episode)
+        {
+            if($note)
+            {
+                $noteplus = $episode->getNbnoteplus() +1;
+                $episode->setNbnoteplus($noteplus);
+            }
+            else
+            {
+                $notemoins = $episode->getNbnotemoins() +1;
+                $episode->setNbnotemoins($notemoins);
+            }
+
+            $newnote = ($episode->getNbnoteplus() / ( $episode->getNbnoteplus() + $episode->getNbnotemoins() ))*100;
+            $episode->setNote($newnote);
+        }
+        else
+        {
+            return null;
+        }
+        echo($_SERVER['SERVER_ADDR']);
+        $em->flush();
+        $response = new JsonResponse();
+        return $response->setData(array('note' => $episode->getNote()));
+
+    }
+
     public function indexAction()
     {
        return $this->render('rjStreamBundle:Home:index.html.twig');
@@ -35,6 +69,57 @@ class StreamController extends Controller
         );
         }
        return $this->render('rjStreamBundle:Saisons:index.html.twig',array('s' => $s,'episodes'=>$episodes));
+    }
+    public function episodeallAction()
+    {
+        $s=0;
+       $episodes = $this->getDoctrine()
+        ->getRepository('rjStreamBundle:Episode')
+        ->findAll();
+
+        if (!$episodes) 
+        {
+          throw $this->createNotFoundException(
+          'Aucun episode'
+        );
+        }
+       return $this->render('rjStreamBundle:Saisons:index.html.twig',array('s' => $s,'episodes'=>$episodes));
+    }
+    public function episodevueAction()
+    {
+        $episode = $this->getDoctrine()
+        ->getRepository('rjStreamBundle:Episode')
+        ->findOneBy(array('saison' => 5, 'episode' => 3));
+
+        if (!$episode) 
+        {
+          return $this->render('rjStreamBundle:Home:index.html.twig');
+        }
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
+    }
+    public function episodenoteAction()
+    {
+        $episode = $this->getDoctrine()
+        ->getRepository('rjStreamBundle:Episode')
+        ->findOneBy(array('saison' => 5, 'episode' => 3));
+
+        if (!$episode) 
+        {
+          return $this->render('rjStreamBundle:Home:index.html.twig');
+        }
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
+    }
+    public function episodelastAction()
+    {
+        $episode = $this->getDoctrine()
+        ->getRepository('rjStreamBundle:Episode')
+        ->findOneBy(array('saison' => 5, 'episode' => 3));
+
+        if (!$episode) 
+        {
+          return $this->render('rjStreamBundle:Home:index.html.twig');
+        }
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
     }
     public function episodeAction($s,$e)
     {

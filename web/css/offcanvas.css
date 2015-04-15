@@ -180,6 +180,19 @@ footer {
   right: -150px;
   top: 390px;
 }
+.note
+{
+  padding: 0;
+}
+.note-plus:hover , .note-moins:hover
+{
+    border: rgba(0, 95, 242,0.5) solid 1.3px;
+}
+.note-plus, .note-moins
+{
+      min-width: 15%;
+      max-width: 85%;
+}
 /*********** HOME ************/
 /*****************************/
 .date
