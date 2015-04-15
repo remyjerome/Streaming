@@ -2,7 +2,8 @@ $('document').ready(function() {
 	$('.note-plus').click(function(){
 		$.ajax({
 			type: 'get',
-			url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/1',
+			url: Routing.generate('rj_stream_episode_notation:', { saison: {{episode.saison}}, episode: {{episode.episode}},note:1});
+			//url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/1',
 			beforeSend: function() {
 				console.log('Chargement');
 				$('.note-plus').addClass('progress-bar-striped active');
@@ -33,3 +34,6 @@ $('document').ready(function() {
 		});
 	});
 });
+
+//url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/1',
+//url:'http://localhost:8888/Streaming/web/app_dev.php/notation/'+{{episode.saison}}+'/'+{{episode.episode}}+'/0',

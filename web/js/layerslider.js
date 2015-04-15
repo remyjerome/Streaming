@@ -1,6 +1,6 @@
     $(document).ready(function(){
         $('#layerslider').layerSlider({
- 			autoStart: false,
+ 			autoStart: true,
             firstLayer: 1,
             skin: 'v5',
             skinsPath: '../../web/skins/',

@@ -7,14 +7,42 @@ namespace rj\StreamBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rj\StreamBundle\Entity\Episode;
+use rj\StreamBundle\Entity\User;
 
 class StreamController extends Controller
 {
     public function notationAction($saison, $episode, $note)
     {
-        sleep(3);
+        /********** On regarde si l'utilisateur n'a pas deja voté aujourd'hui **********/
         $em = $this->getDoctrine()->getManager();
-        $episode = $em->getRepository('rjStreamBundle:Episode')
+        $newUser = new User($saison,$episode);  //Création d'un nouvel utilisateur (ip(auto),saison,episode,date(auto))
+        $user = $em->getRepository('rjStreamBundle:User')
+        ->findOneBy(array('saison' => $saison, 'episode' => $episode, 'ip' => $newUser->getIp())); //On cherche dans la BDD si l'utilisateur a deja vote pour cet episode
+        if($user)   //Si on trouve un utilisateur dans la BDD
+        {
+    
+            $interval = $user->getDate()->diff($newUser->getDate());
+            if((int)$interval->format('%a') >= 1)   //On regarde son dernier vote remonte a plus de 24h
+            {
+                $user->setDate(new \Datetime());    //+de 24h on réaffecte une nouvelle date
+                $em->flush();
+
+            }
+            else    //sinon on return null l'utilisateur a deja voté
+            {
+
+                $response1 = new JsonResponse();
+                return $response1->setData(array('note' => ''));
+            }
+        }
+        else //Sinon l'utilisateur vote pour la première fois pour cet episode
+        {
+            $em->persist($newUser); //On enregistre donc cet utilisateur dans la BDD
+            $em->flush();
+        }
+        /********** Application de la note **********/
+        $em1 = $this->getDoctrine()->getManager();
+        $episode = $em1->getRepository('rjStreamBundle:Episode')
         ->findOneBy(array('saison' => $saison, 'episode' => $episode));
 
         if($episode)
@@ -37,8 +65,7 @@ class StreamController extends Controller
         {
             return null;
         }
-        echo($_SERVER['SERVER_ADDR']);
-        $em->flush();
+        $em1->flush();
         $response = new JsonResponse();
         return $response->setData(array('note' => $episode->getNote()));
 
