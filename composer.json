@@ -23,9 +23,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "coresphere/console-bundle": "dev-master",
         "doctrine/common": ">=2.1",
-        "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "sonata-project/admin-bundle": "~2.3",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.3"
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

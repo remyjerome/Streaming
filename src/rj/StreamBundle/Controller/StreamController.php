@@ -177,10 +177,9 @@ class StreamController extends Controller
 
         if (!$episode) 
         {
-          /*throw $this->createNotFoundException(
-          'Aucun episode pour : s'.$e.'e'.$s);*/
           return $this->render('rjStreamBundle:Home:index.html.twig');
         }
+
        return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $s,'e'=> $e, 'episode'=>$episode));
     }
     public function newsAction()
@@ -293,4 +292,5 @@ class StreamController extends Controller
 
     return new Response('Reussi');
     }
+
 }
