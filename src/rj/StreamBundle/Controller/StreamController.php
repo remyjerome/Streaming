@@ -67,7 +67,7 @@ class StreamController extends Controller
         }
         $em1->flush();
         $response = new JsonResponse();
-        return $response->setData(array('note' => $episode->getNote()));
+        return $response->setData(array('note' => $episode->getNote(), 'nbplus' => $episode->getNbnoteplus(), 'nbmoins' => $episode->getNbnotemoins() ));
 
     }
 
@@ -170,7 +170,9 @@ class StreamController extends Controller
         $s =5;
         $e =10;
       }
-
+      /********** Compteur de vues **********/
+        
+      /********** Recherche episode BDD et affichage **********/
         $episode = $this->getDoctrine()
         ->getRepository('rjStreamBundle:Episode')
         ->findOneBy(array('saison' => $s, 'episode' => $e));

@@ -23,11 +23,11 @@
              
             <div class=" col-xs-3 pull-right note"> 
                 <div class="progress">
-                    <div class="progress-bar progress-bar-success active note-plus" style="width: {{episode.note}}%;">
+                    <div class="progress-bar progress-bar-success active note-plus" style="width: {{episode.note}}%;" data-toggle="tooltip" data-placement="top" title="{{episode.nbnoteplus}} votes">
                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                         <span class="sr-only">35% Complete (success)</span>
                     </div>
-                    <div class="progress-bar progress-bar-danger note-moins" style="width: {{100-episode.note}}%;">
+                    <div class="progress-bar progress-bar-danger note-moins" style="width: {{100-episode.note}}%;" data-toggle="tooltip" data-placement="top" title="{{episode.nbnotemoins}} votes">
                         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                         <span class="sr-only">35% Complete (danger)</span>
                     </div>
@@ -166,6 +166,7 @@
                     {        
                         $('.note-plus').css('width',data.note+'%');
                         $('.note-moins').css('width',100 - data.note+'%');
+                        $('.note-plus').attr('data-original-title', data.nbplus+' votes');
                     }
                     $('.note-plus').removeClass('progress-bar-striped active');
 
@@ -186,6 +187,7 @@
                     {
                         $('.note-plus').css('width',data.note+'%');
                         $('.note-moins').css('width',100 - data.note+'%');
+                        $('.note-moins').attr('data-original-title', data.nbmoins+' votes');
                     }
                     $('.note-moins').removeClass('progress-bar-striped active');
                 }

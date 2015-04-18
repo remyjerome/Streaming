@@ -7,4 +7,11 @@ $(document).ready(function()
 		});
 	$('li.active:first').removeClass('active');
 	$('li.episode').addClass('active');
+	$('[data-toggle="tooltip"]').tooltip();
+	$( '[data-toggle="tooltip"]' ).hover(
+  	function() {
+  		$(this).tooltip('show');
+  	});
+
+
 });
