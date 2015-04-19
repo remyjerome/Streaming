@@ -151,11 +151,13 @@
 
     <script>
     $('document').ready(function() {
+        var episode = {{ episode.episode|json_encode() }};
+        var saison = {{ episode.saison|json_encode() }};
         $('.note-plus').click(function(){
             $.ajax({
                 type: 'get',
                 
-                url: Routing.generate('rj_stream_episode_notation', { saison: {{episode.saison}}, episode: {{episode.episode}}, note:1}),
+                url: Routing.generate('rj_stream_episode_notation', { saison: saison, episode: episode, note:1}),
                 beforeSend: function() {
                     console.log('Chargement');
                     $('.note-plus').addClass('progress-bar-striped active');
@@ -176,7 +178,7 @@
         $('.note-moins').click(function(){
             $.ajax({
                 type: 'get',
-                url: Routing.generate('rj_stream_episode_notation', { saison: {{episode.saison}}, episode: {{episode.episode}}, note:0}),
+                url: Routing.generate('rj_stream_episode_notation', { saison: saison, episode: episode, note:0}),
                 beforeSend: function() {
                     console.log('Chargement');
                     $('.note-moins').addClass('progress-bar-striped active');
