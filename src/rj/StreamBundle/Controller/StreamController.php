@@ -117,27 +117,49 @@ class StreamController extends Controller
     }
     public function episodevueAction()
     {
-        $episode = $this->getDoctrine()
-        ->getRepository('rjStreamBundle:Episode')
-        ->findOneBy(array('saison' => 5, 'episode' => 3));
+        //SELECT * FROM Episode HAVING vue = (SELECT MAX(vue) FROM Episode)
+        $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:Episode'); //Entité Episode
+
+        $qb = $repository->createQueryBuilder('e1');
+
+        $query1 = $qb->select($qb->expr()->max('e1.vue'))
+            ->from('rjStreamBundle:Episode','e2')->getQuery();
+        $vue = $query1->getSingleResult();
+        $qb2 = $repository->createQueryBuilder('e') ;
+        $query2 = $qb2->having('e.vue = :vue')
+            ->setParameter('vue', $vue)
+            ->getQuery();
+        $episode = $query2->getSingleResult();
 
         if (!$episode) 
         {
           return $this->render('rjStreamBundle:Home:index.html.twig');
         }
-       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $episode->getSaison(),'e'=> $episode->getEpisode(), 'episode'=>$episode));
     }
     public function episodenoteAction()
     {
-        $episode = $this->getDoctrine()
-        ->getRepository('rjStreamBundle:Episode')
-        ->findOneBy(array('saison' => 5, 'episode' => 3));
 
+        //SELECT * FROM Episode HAVING note = (SELECT MAX(note) FROM Episode)
+        $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:Episode'); //Entité Episode
+
+        $qb = $repository->createQueryBuilder('e1');
+
+        $query1 = $qb->select($qb->expr()->max('e1.note'))
+            ->from('rjStreamBundle:Episode','e2')->getQuery();
+        $note = $query1->getSingleResult();
+        $qb2 = $repository->createQueryBuilder('e') ;
+        $query2 = $qb2->having('e.note = :note')
+            ->setParameter('note', $note)
+            ->getQuery();
+        $episode = $query2->getSingleResult();
         if (!$episode) 
         {
           return $this->render('rjStreamBundle:Home:index.html.twig');
         }
-       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $episode->getSaison(),'e'=> $episode->getEpisode(), 'episode'=>$episode));
     }
     public function episodelastAction()
     {
@@ -148,22 +170,22 @@ class StreamController extends Controller
             ->getRepository('rjStreamBundle:Episode'); //Entité Episode
 
         $qb = $repository->createQueryBuilder('e1');
-
         $query1 = $qb->select($qb->expr()->max('e1.date'))
             ->from('rjStreamBundle:Episode','e2')->getQuery();
         $date = $query1->getSingleResult();
+
         $qb2 = $repository->createQueryBuilder('e') ;
-        $query = $qb2->having('e.date = :date')
+        $query2 = $qb2->having('e.date = :date')
             ->setParameter('date', $date)
             ->getQuery();
        
-        $episode = $query->getSingleResult();
+        $episode = $query2->getSingleResult();
 
         if (!$episode) 
         {
           return $this->render('rjStreamBundle:Home:index.html.twig');
         }
-       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => 5,'e'=> 3, 'episode'=>$episode));
+       return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $episode->getSaison(),'e'=> $episode->getEpisode(), 'episode'=>$episode));
     }
     public function episodeAction($s,$e)
     {
