@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rj\StreamBundle\Entity\Episode;
 use rj\StreamBundle\Entity\User;
+use rj\StreamBundle\Entity\vue;
+use Doctrine\ORM\Query\ResultSetMapping;
+
 
 class StreamController extends Controller
 {
@@ -138,9 +141,23 @@ class StreamController extends Controller
     }
     public function episodelastAction()
     {
-        $episode = $this->getDoctrine()
-        ->getRepository('rjStreamBundle:Episode')
-        ->findOneBy(array('saison' => 5, 'episode' => 3));
+        
+        //SELECT * FROM Episode HAVING date = (SELECT MAX(date) FROM Episode)
+
+       $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:Episode'); //Entité Episode
+
+        $qb = $repository->createQueryBuilder('e1');
+
+        $query1 = $qb->select($qb->expr()->max('e1.date'))
+            ->from('rjStreamBundle:Episode','e2')->getQuery();
+        $date = $query1->getSingleResult();
+        $qb2 = $repository->createQueryBuilder('e') ;
+        $query = $qb2->having('e.date = :date')
+            ->setParameter('date', $date)
+            ->getQuery();
+       
+        $episode = $query->getSingleResult();
 
         if (!$episode) 
         {
@@ -170,10 +187,10 @@ class StreamController extends Controller
         $s =5;
         $e =10;
       }
-      /********** Compteur de vues **********/
         
       /********** Recherche episode BDD et affichage **********/
-        $episode = $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $episode = $em
         ->getRepository('rjStreamBundle:Episode')
         ->findOneBy(array('saison' => $s, 'episode' => $e));
 
@@ -181,7 +198,32 @@ class StreamController extends Controller
         {
           return $this->render('rjStreamBundle:Home:index.html.twig');
         }
+        /********** Compteur de vues **********/
+        $em = $this->getDoctrine()->getManager();
+        $newVue = new vue($s,$e);  //Création d'un nouvel utilisateur (ip(auto),saison,episode,date(auto))
+        $vue = $em->getRepository('rjStreamBundle:vue')
+        ->findOneBy(array('saison' => $s, 'episode' => $e, 'ip' => $newVue->getIp())); //On cherche dans la BDD si l'utilisateur a deja vote pour cet episode
+        if($vue)   //Si on trouve un utilisateur dans la BDD
+        {
+    
+            $interval = $vue->getDate()->diff($newVue->getDate());
+            if((int)$interval->format('%a') >= 1)   //On regarde son dernier vote remonte a plus de 24h
+            {
+                $vue->setDate(new \Datetime());    //+de 24h on réaffecte une nouvelle date
+                $em->flush();
 
+                $episode->setVue($episode->getVue()+1);
+
+            }
+        }
+        else //Sinon l'utilisateur vote pour la première fois pour cet episode
+        {
+            $em->persist($newVue); //On enregistre donc cet utilisateur dans la BDD
+            $em->flush();
+            $episode->setVue($episode->getVue()+1);
+        }
+        /**************************************/
+        $em->flush();
        return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $s,'e'=> $e, 'episode'=>$episode));
     }
     public function newsAction()
