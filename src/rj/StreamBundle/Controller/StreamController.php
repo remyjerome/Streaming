@@ -93,7 +93,55 @@ class StreamController extends Controller
 
     public function indexAction()
     {
-       return $this->render('rjStreamBundle:Home:index.html.twig');
+        //SELECT * FROM Episode HAVING date = (SELECT MAX(date) FROM Episode)
+
+       $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:Episode'); //Entité Episode
+
+        $qb = $repository->createQueryBuilder('e1');
+        $query1 = $qb->select($qb->expr()->max('e1.date'))
+            ->from('rjStreamBundle:Episode','e2')->getQuery();
+        $date = $query1->getSingleResult();
+
+        $qb2 = $repository->createQueryBuilder('e') ;
+        $query2 = $qb2->having('e.date = :date')
+            ->setParameter('date', $date)
+            ->getQuery();
+       
+        $episode = $query2->getSingleResult();
+
+        if (!$episode) 
+        {
+          throw $this->createNotFoundException(
+          'Aucun episode trouvé'
+          );
+        }
+        //SELECT * FROM Episode HAVING date = (SELECT MAX(date) FROM Episode)
+
+       $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:News'); 
+
+        $qb = $repository->createQueryBuilder('n1');
+        $query1 = $qb->select($qb->expr()->max('n1.date'))
+            ->from('rjStreamBundle:News','n2')->getQuery();
+        $date = $query1->getSingleResult();
+
+        $qb2 = $repository->createQueryBuilder('n') ;
+        $query2 = $qb2->having('n.date = :date')
+            ->setParameter('date', $date)
+            ->getQuery();
+       
+        $new = $query2->getSingleResult();
+
+        if (!$new) 
+        {
+          throw $this->createNotFoundException(
+          'Aucune news trouvée'
+          );
+        }
+
+
+       return $this->render('rjStreamBundle:Home:index.html.twig', array('new' => $new,'episode'=>$episode));
     }
     public function saisonAction($s)
     {

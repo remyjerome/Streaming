@@ -17,14 +17,96 @@
 
 {% block body %}
     <h2>News</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="panel-title">Dates de sortie officielles des episodes</h3>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-condensed">
+                    <tr>
+                        <th>Saison</th>
+                        <th>Episode</th> 
+                        <th>Titre</th>
+                        <th>Date de diffusion</th>
+                    </tr>
+                    <tr class="active">
+                        <td>5</td>
+                        <td>01</td> 
+                        <td>The Wars to Come</td>
+                        <td>12 Avril 2015</td>
+                    </tr>
+                    <tr class="active">
+                        <td>5</td>
+                        <td>02</td> 
+                        <td>The House of Black and White</td>
+                        <td>19 Avril 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>03</td> 
+                        <td>High Sparrow</td>
+                        <td>26 Avril 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>04</td> 
+                        <td>The Sons of the Harpy</td>
+                        <td>03 Mai 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>05</td> 
+                        <td>Kill the Boy</td>
+                        <td>10 Mai 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>06</td> 
+                        <td>Unbowed, Unbent, Unbroken</td>
+                        <td>17 Mai 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>07</td> 
+                        <td>The Gift</td>
+                        <td>24 Mai 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>08</td> 
+                        <td>Titre inconnu</td>
+                        <td>31 Mai 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>09</td> 
+                        <td>Titre inconnu</td>
+                        <td>07 Juin 2015</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>10</td> 
+                        <td>Titre inconnu</td>
+                        <td>14 Juin 2015</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
     {% for new in news %}
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-xs-5">
+                <div class="col-xs-12">
                     <h3 class="panel-title">{{ new.titre }}  <span class="label label-default color-red">New</span></h3>
                 </div>
-                <div class="col-xs-7 text-right pull-right">
+
+                <div class="col-xs-12">
                     <span class="icon-pencil span"><p class="info-news">{{ new.auteur }}</p></span>
                     <span class="icon-clock-1 span"><p class="info-news">{{ new.date|date("m/d/Y") }}</p></span>
                     <span class="icon-tag span"><p class="info-news">{{ new.tag1 }}</p><p class="info-news"> - {{ new.tag2 }}</p><p class="info-news"> - {{ new.tag3 }}</p></span>
@@ -47,4 +129,5 @@
 {% block javascripts %}
     {{ parent() }} 
     <script src="{{asset('js/news.js')}}"></script> 
+    <script src="{{asset('js/news-plus.js')}}"></script>
 {% endblock %}
