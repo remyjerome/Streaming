@@ -1,8 +1,12 @@
-{# src/rj/StreamBundle/Resources/views/Saisons/index.html.twig #}
+{# src/rj/StreamBundle/Resources/views/News/index.html.twig #}
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
+    
+    <link rel="stylesheet" href="{{ asset('css/fontello/fontello.css') }}">
+    <!--[if IE 7]><link rel="stylesheet" href="{{ asset('css/fontello/fontello-ie7.css') }}"><![endif]-->
+    <link rel="stylesheet" href="{{ asset('css/fontello/animation.css') }}">
 {% endblock %}
 
 {% block title %}News - Game of Thrones{% endblock %}
@@ -13,25 +17,32 @@
 
 {% block body %}
     <h2>News</h2>
+    {% for new in news %}
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-5">
-                    <h3 class="panel-title">Panel title <span class="label label-default">New</span></h3>
+                    <h3 class="panel-title">{{ new.titre }}  <span class="label label-default color-red">New</span></h3>
                 </div>
-                <div class="col-xs-3 pull-right">
-                    <p class="date text-right" >pulier le 15/05/2015</p>
+                <div class="col-xs-7 text-right pull-right">
+                    <span class="icon-pencil span"><p class="info-news">{{ new.auteur }}</p></span>
+                    <span class="icon-clock-1 span"><p class="info-news">{{ new.date|date("m/d/Y") }}</p></span>
+                    <span class="icon-tag span"><p class="info-news">{{ new.tag1 }}</p><p class="info-news"> - {{ new.tag2 }}</p><p class="info-news"> - {{ new.tag3 }}</p></span>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
+        <div id="{{new.id}}" class="panel-body">
                     <a href="#" class="thumbnail image-saison">
-                        <img src="{{asset('images/got.jpg')}}" alt="image saison episode 1" >
+                        <img src="{{asset('images/')}}{{new.image}}" alt="image saison episode 1" >
                     </a>
-                    <p class="text-justify">Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.</p>
-
+                    <p id="description-news-{{new.id}}" class="text-justify description-news">{{ new.description|truncate(450, true, ' ...')|nl2br }}</p>
+                    <div class="col-xs-12 text-center">
+                        <span onclick="newsplus(this,{{new.id}});" id="news-plus-{{new.id}}" class="icon-angle-circled-down span news-plus"></span>
+                        <span onclick="newsmoins(this,{{new.id}});"  id="news-moins-{{new.id}}" class="icon-angle-circled-up span news-moins"></span>
+                    </div>
         </div>
     </div>
+    {% endfor %}
 {% endblock %}
 {% block javascripts %}
     {{ parent() }} 

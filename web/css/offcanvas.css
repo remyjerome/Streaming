@@ -10,6 +10,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+    font-family: 'game_of_thronesregular';
+    src: url('../fonts/game_of_thrones.eot');
+    src: url('../fonts/game_of_thrones.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/game_of_thrones.woff2') format('woff2'),
+         url('../fonts/game_of_thrones.woff') format('woff'),
+         url('../fonts/game_of_thrones.ttf') format('truetype'),
+         url('../fonts/game_of_thrones.svg#game_of_thronesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -21,6 +33,18 @@ footer {
   padding: 30px 0;
 }
 
+a:hover 
+{
+  color : rgba(169, 17, 1, 1);
+}
+.color-red
+{
+  background-color: rgba(169, 17, 1, 1);
+}
+a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover
+{
+  border-color: rgba(169, 17, 1, 1);
+}
 /*
  * Off Canvas
  * -------------------------- 767------------------------
@@ -255,9 +279,45 @@ footer {
 {
   -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
   -moz-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
-  -ms-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+  -ms-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAeABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
   mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+/*********** NEWS ************/
+/*****************************/
+.info-news
+{
+  display: inline;
+  color: rgba(90, 94, 107,1);
+  font-size: 1em;
+}
+.info-news:hover
+{
+  color:rgba(90, 94, 107,0.5);
+  border-bottom: 1.4px dotted;
+}
+.span
+{
+  color : rgba(169, 17, 1, 1);
+}
+.news-moins
+{
+  display: none;
+}
+
+.description-news::first-letter
+{
+  color: rgba(169, 17, 1, 1);
+  font-size: 5.5em; 
+  font-family: game_of_thronesregular, sans-serif;
+  float: left;
+  margin-right: 15px;
+}
+.chargement
+{
+
+}
+
+

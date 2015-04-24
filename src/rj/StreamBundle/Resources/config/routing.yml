@@ -16,7 +16,7 @@ rj_stream_news:
     path:     /news
     defaults: { _controller: rjStreamBundle:Stream:news}
 rj_stream_add:
-    path:     /add
+    path:     /episode/add
     defaults: { _controller: rjStreamBundle:Stream:create }
 rj_stream_episode_all:
     path:     /episode/all
@@ -39,3 +39,11 @@ rj_stream_episode_notation:
         saison: \d+
     options:
         expose: true
+rj_stream_add_news:
+    path:   /news/add
+    defaults: { _controller: rjStreamBundle:Stream:addnews }
+rj_stream_news_voirplus:
+    path:   /voirplus/{id}
+    defaults: { _controller: rjStreamBundle:Stream:voirplus }
+    requirements:
+        id: \d+

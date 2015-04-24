@@ -5,15 +5,32 @@
 namespace rj\StreamBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use rj\StreamBundle\Entity\Episode;
 use rj\StreamBundle\Entity\User;
 use rj\StreamBundle\Entity\vue;
+use rj\StreamBundle\Entity\News;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 
 class StreamController extends Controller
 {
+    public function voirplusAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $new = $em->getRepository('rjStreamBundle:News')
+        ->find($id);
+        if(!$new)
+        {
+            throw $this->createNotFoundException(
+          'Aucune news'
+        );
+        }
+        $response = new JsonResponse();
+        return $response->setData(array('description' => $new->getDescription()));
+
+    }
     public function notationAction($saison, $episode, $note)
     {
         /********** On regarde si l'utilisateur n'a pas deja voté aujourd'hui **********/
@@ -250,7 +267,17 @@ class StreamController extends Controller
     }
     public function newsAction()
     {
-       return $this->render('rjStreamBundle:News:index.html.twig');
+        $news = $this->getDoctrine()
+        ->getRepository('rjStreamBundle:News')
+        ->findAll();
+
+        if (!$news) 
+        {
+          throw $this->createNotFoundException(
+          'Aucune news'
+        );
+        }
+       return $this->render('rjStreamBundle:News:index.html.twig', array('news'=>$news));
     }
     public function createAction()
     {
@@ -357,6 +384,33 @@ class StreamController extends Controller
 
 
     return new Response('Reussi');
+    }
+    public function addnewsAction()
+    {
+        //NEWS 1
+        $news = new News();
+        $news->setTitre('FUITE DES QUATRE PREMIERS ÉPISODES DE LA SAISON 5');
+        $news->setDescription("Les quatre premiers épisodes de la saison 5 de Game of Thrones ont été mis en ligne dans la nuit de samedi à dimanche, quelques heures avant la diffusion simultanée du season premiere sur tous les réseaux partenaires du producteur, HBO.
+
+HBO, producteur de la très populaire série Game of Thrones, avait organisé un lancement de grande ampleur pour l'ouverture de la saison 5, dimanche 12 avril. Le premier épisode, baptisé The War to Come, devait ainsi débuter simultanément sur l'ensemble des réseaux de distribution partenaires, de façon à ce qu'aucun pays n'ait la primeur des révélations liées à cette cinquième saison.
+
+Un grain de sable est cependant venu perturber cette mécanique bien rodée : dans la nuit de samedi à dimanche, les quatre premiers épisode de la saison 5 ont été mis à disposition des internautes, d'abord par l'intermédiaire d'un tracker BitTorrent privé. Les fichiers se sont ensuite très rapidement propagés, jusqu'à devenir référencés sur la plupart des sites et annuaires consacrés au téléchargement.
+
+Pour le site spécialisé TorrentFreak, qui s'est le premier fait l'écho de cette fuite, plus de 135 000 internautes partageaient le fichier correspondant à l'épisode 1 dimanche, pour un total estimé à plus d'un million de téléchargements en moins de 18 heures.
+
+Les fichiers concernés ne brillent cependant pas par leur qualité : la vidéo est encodée en 480p, et comporte un watermark flouté.
+");
+        $news->setImage('news2.jpg');
+        $news->setAuteur('Admin');
+        $news->setTag1('Game of Thrones');
+        $news->setTag2('HBO');
+        $news->setTag3('Saison 5');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($news);
+        $em->flush();
+        return new Response('Reussi');
     }
 
 }
