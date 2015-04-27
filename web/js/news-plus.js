@@ -21,9 +21,9 @@ function newsplus(e, id){
                     		var content = $('<p id="description-news-'+id+'" class="text-justify description-news">'+data.description.nl2br()+'</p>').hide();
 							$('#description-news-'+id).replaceWith(content);
 							$('#description-news-'+id).slideDown();
-							$('.image-saison').hide();
-							$('.image-saison').slideDown();
-    						$('.image-saison').toggleClass('active');
+							$('#image-saison-'+id).hide();
+							$('#image-saison-'+id).slideDown();
+    						$('#image-saison-'+id).toggleClass('active');
 							$('#news-moins-'+id).css('display','initial');
                     	} 
 
@@ -50,7 +50,7 @@ function newsmoins(e, id){
                     	if(data.description)
                     	{
 							$('#description-news-'+id).replaceWith('<p id="description-news-'+id+'" class="text-justify description-news">'+data.description.substr(0,456).nl2br()+' ...</p>');
-							$('.image-saison').toggleClass('active'); 
+							$('#image-saison-'+id).toggleClass('active'); 
 							$('#news-plus-'+id).css('display','initial');
 
                     	} 

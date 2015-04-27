@@ -222,7 +222,8 @@ class StreamController extends Controller
         $episode = $query2->getSingleResult();
         if (!$episode) 
         {
-          return $this->render('rjStreamBundle:Home:index.html.twig');
+          throw $this->createNotFoundException(
+          'Aucun episode trouvé');
         }
        return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $episode->getSaison(),'e'=> $episode->getEpisode(), 'episode'=>$episode));
     }
@@ -248,7 +249,8 @@ class StreamController extends Controller
 
         if (!$episode) 
         {
-          return $this->render('rjStreamBundle:Home:index.html.twig');
+          throw $this->createNotFoundException(
+          'Aucun episode trouvé');
         }
        return $this->render('rjStreamBundle:Episodes:index.html.twig',array('s' => $episode->getSaison(),'e'=> $episode->getEpisode(), 'episode'=>$episode));
     }
@@ -283,8 +285,8 @@ class StreamController extends Controller
 
         if (!$episode) 
         {
-          return $this->render('rjStreamBundle:Home:index.html.twig');
-        }
+            throw $this->createNotFoundException(
+          'Aucun episode trouvé');        }
         /********** Compteur de vues **********/
         $em = $this->getDoctrine()->getManager();
         $newVue = new vue($s,$e);  //Création d'un nouvel utilisateur (ip(auto),saison,episode,date(auto))

@@ -31,8 +31,8 @@
             </div>
         </div>
         <div id="{{new.id}}" class="panel-body">
-                    <a href="#" class="thumbnail image-saison">
-                        <img src="{{asset('images/')}}{{new.image}}" alt="image saison episode 1" >
+                    <a href="#" id="image-saison-{{new.id}}" class="thumbnail image-saison">
+                        <img  src="{{asset('images/')}}{{new.image}}" alt="image saison episode 1" >
                     </a>
                     <p id="description-news-{{new.id}}" class="text-justify description-news">{{ new.description|truncate(450, true, ' ...')|nl2br }}</p>
                     <div class="col-xs-12 text-center">
