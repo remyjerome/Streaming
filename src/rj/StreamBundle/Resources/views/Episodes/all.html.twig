@@ -1,0 +1,30 @@
+{# src/rj/StreamBundle/Resources/views/Episodes/all.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Tous les épisodes - Game of Thrones{% endblock %}
+{% block navbar %}
+    {{ parent() }}  
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}  
+{% endblock %}
+
+{% block body %}
+    <div class="list-group">
+        <a href="#" class="list-group-item disabled">
+        Cras justo odio
+        </a>
+        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}  
+    <script src="{{asset('js/episode.js')}}"></script>
+{% endblock %}

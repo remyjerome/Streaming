@@ -58,7 +58,16 @@
                 </div>
             </div><!-- row -->
             <div class="jumbotron">
-                <p>Pour le moment un seul lecteur est à votre disposition : MyStream.</p>
+                <p>Pour le moment un seul lecteur est à votre disposition : Purevid</p>
+                <a class="lien-episode center-block" data-toggle="collapse" href="#collapseDescription" aria-expanded="false" aria-controls="collapseDescription">
+            Description de l'épisode
+            </a>
+            <div class="collapse" id="collapseDescription">
+                <div class="well center">
+                    <p class="description_episode">{{episode.description|nl2br}}</p>
+                </div>
+            </div>
+
             </div>
             <ul class="nav nav-tabs nav-justified">
                 <li role="presentation" class="dropdown active">
@@ -105,11 +114,8 @@
             </a>
             <div class="collapse" id="collapseExample">
                 <div class="well center">
-                    <a href="{{episode.lien}}">MyStream link </a>
-                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    <a href="#">Exashare link </a>
-                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    <a href="#">PureVid link </a>
+                    <a href="{{episode.lien}}">Purevid link </a>
+                    
                 </div>
             </div>
         </div>  

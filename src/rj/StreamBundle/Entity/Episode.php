@@ -278,6 +278,8 @@ class Episode
         $this->date = new \Datetime();
         $this->note = 50;
         $this->vue = 0;
+        $this->nbnoteplus =1;
+        $this->nbnotemoins =1;
     }
 
     /**
