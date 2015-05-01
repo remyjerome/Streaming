@@ -137,9 +137,23 @@ class User
         return $this->episode;
     }
 
+    public function get_ip() {
+    // IP si internet partagé
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    }
+    // IP derrière un proxy
+    elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    // Sinon : IP normale
+    else {
+        return (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
+    }
+    }
     public function __construct($saison, $episode)
     {
-        $this->ip = $_SERVER["REMOTE_ADDR"];
+        $this->ip = $this->get_ip();
         $this->saison = $saison;
         $this->episode = $episode;
         $this->date = new \Datetime();

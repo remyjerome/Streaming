@@ -11,7 +11,8 @@ Saison {{ s }} - Game of Thrones
 {% block sidebar %}
     {{ parent() }}  
 {% endblock %}
-
+{% block slider %}
+{% endblock %}
 {% block body %}
     <h2>Saison {{ s }}</h2>
     {% for episode in episodes %}

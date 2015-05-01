@@ -321,6 +321,11 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover
 .news-moins
 {
   display: none;
+  cursor: pointer;
+}
+.news-plus
+{
+  cursor: pointer;
 }
 
 .description-news::first-letter

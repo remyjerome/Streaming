@@ -57,7 +57,7 @@
                 <li><a href="{{ path('rj_stream_episode_note') }}">Episode le mieux noté</a></li>
               </ul>
               </li>
-              <li class="news"><a href="{{ path('rj_stream_news', { 'date': 2015, 'id': 1 }) }}">News <span class="badge color-red">5</span></a></li>
+              <li class="news"><a href="{{ path('rj_stream_news') }}">News <span class="badge color-red">5</span></a></li>
           </ul>
           <!--<form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
@@ -70,7 +70,9 @@
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
     {% endblock %}
+    
     <div class="container">
+      {% block slider %}
         <div id="layerslider" style="width:1280px;height:720px;max-width: 1280px;">
           <div class="ls-slide" data-ls="slidedelay:10000;transition2d:75,79;">
             <img src="{{ asset('images/sliderimages/bg.jpg') }}" class="ls-bg" alt="Slide background"/><img class="ls-l" style="top:0px;left:0px;white-space: nowrap;" data-ls="offsetxin:0;durationin:2000;easingin:linear;offsetxout:0;durationout:6000;showuntil:1;easingout:linear;" src="{{ asset('images/sliderimages/bg21.jpg') }}" alt="">
@@ -115,6 +117,7 @@
             </p>
             </div>  
         </div>
+      {% endblock %}
         <hr>
       <div class="row row-offcanvas row-offcanvas-right">
 

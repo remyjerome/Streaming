@@ -82,3 +82,5 @@ services:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         tags:
             - { name: serializer.normalizer }
+fos_js_routing:
+    routes_to_expose: [ ^((?!_admin_).)*$ ]
