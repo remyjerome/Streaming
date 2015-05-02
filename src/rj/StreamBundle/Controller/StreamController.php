@@ -16,6 +16,24 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
 class StreamController extends Controller
 {
+    public function nbepisodeAction()
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('rjStreamBundle:Episode');
+        $qb = $repository->createQueryBuilder('e');
+        $qb->select('count(e.saison)');
+        
+
+        $episode = $qb->getQuery()->getSingleScalarResult();
+        if(!$episode)
+        {
+            throw $this->createNotFoundException(
+          'Aucun episode'
+        );
+        }
+        $response = new JsonResponse();
+        return $response->setData(array('nbepisode' => $episode));   
+    }
     public function hebergeurAction()
     {
         $hebergeur = new hebergeur(1,1,"purevid");

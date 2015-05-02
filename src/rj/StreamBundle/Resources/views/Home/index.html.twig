@@ -71,5 +71,7 @@
 {% block javascripts %}
     {{ parent() }} 
     <script src="{{asset('js/home.js')}}"></script>
+    <!-- Web storage -->
+    <script src="{{ asset('js/webstorage.js') }}"></script>
     <script src="{{asset('js/news-plus.js')}}"></script>
 {% endblock %}
